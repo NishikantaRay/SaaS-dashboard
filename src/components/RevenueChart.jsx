@@ -16,7 +16,7 @@ export const RevenueChart = ({ data }) => {
   const isDark = theme === 'dark';
 
   // Transform data for current and previous week
-  const chartData = data.map((item, index) => ({
+  const chartData = data.map((item) => ({
     ...item,
     current: item.value,
     previous: item.value * 0.85 // Mock previous week data

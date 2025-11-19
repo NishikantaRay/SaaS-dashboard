@@ -4,8 +4,6 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 const COLORS = ['#6366F1', '#8B5CF6', '#EC4899', '#F59E0B'];
 
 export const TotalSales = ({ data }) => {
-  const total = data.reduce((sum, item) => sum + item.value, 0);
-
   return (
     <Card>
       <CardHeader>

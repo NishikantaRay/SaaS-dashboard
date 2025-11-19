@@ -1,12 +1,9 @@
 import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { useTheme } from '../context/ThemeContext';
 
 const COLORS = ['#6366F1', '#8B5CF6', '#EC4899', '#F59E0B'];
 
 export const RevenueByLocation = ({ data }) => {
-  const { theme } = useTheme();
-  const isDark = theme === 'dark';
 
   return (
     <Card>
