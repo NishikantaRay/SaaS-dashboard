@@ -3,7 +3,7 @@ import { Button } from './ui/Button';
 import { SearchInput } from './ui/Input';
 import { useTheme } from '../context/ThemeContext';
 
-export const Header = ({ onMenuClick }) => {
+export const Header = ({ onMenuClick, onNotificationsClick }) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
@@ -47,7 +47,13 @@ export const Header = ({ onMenuClick }) => {
           </Button>
 
           {/* Notifications */}
-          <Button variant="icon" size="icon" aria-label="Notifications">
+          <Button 
+            variant="icon" 
+            size="icon" 
+            onClick={onNotificationsClick}
+            aria-label="Notifications"
+            className="lg:hidden"
+          >
             <Bell size={18} />
           </Button>
 

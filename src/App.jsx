@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Sidebar } from './components/Sidebar';
 import { Header } from './components/Header';
+import { NotificationsSidebar } from './components/NotificationsSidebar';
 import { Dashboard } from './components/Dashboard';
 import { UserProfile } from './pages/UserProfile';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-white dark:bg-black transition-colors duration-200">
@@ -15,8 +17,16 @@ function App() {
         onClose={() => setSidebarOpen(false)}
       />
       
-      <div className="lg:pl-64">
-        <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+      <NotificationsSidebar
+        isOpen={notificationsOpen}
+        onClose={() => setNotificationsOpen(false)}
+      />
+      
+      <div className="lg:ml-64 lg:mr-80">
+        <Header 
+          onMenuClick={() => setSidebarOpen(!sidebarOpen)}
+          onNotificationsClick={() => setNotificationsOpen(!notificationsOpen)}
+        />
         
         <main className="min-h-[calc(100vh-73px)]">
           <Routes>
