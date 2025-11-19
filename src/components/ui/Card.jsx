@@ -7,7 +7,7 @@ export const Card = ({ children, className, ...props }) => {
   return (
     <div
       className={cn(
-        'bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700',
+        'bg-white dark:bg-white/10 rounded-lg border border-gray-200 dark:border-white/10',
         'transition-colors duration-200',
         className
       )}
@@ -24,7 +24,7 @@ export const Card = ({ children, className, ...props }) => {
 export const CardHeader = ({ children, className, ...props }) => {
   return (
     <div
-      className={cn('px-6 py-4 border-b border-gray-200 dark:border-gray-700', className)}
+      className={cn('px-6 py-4 border-b border-gray-200 dark:border-white/10', className)}
       {...props}
     >
       {children}

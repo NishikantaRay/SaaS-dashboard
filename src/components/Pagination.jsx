@@ -31,7 +31,7 @@ export const Pagination = ({
   const visiblePages = getVisiblePages();
 
   return (
-    <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+    <div className="flex items-center justify-between px-6 py-4 border-t border-gray-200 dark:border-white/10">
       <div className="text-sm text-gray-600 dark:text-gray-400">
         Showing {startItem} to {endItem} of {totalItems} results
       </div>

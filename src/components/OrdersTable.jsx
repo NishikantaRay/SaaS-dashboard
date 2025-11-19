@@ -139,7 +139,7 @@ export const OrdersTable = ({ initialData }) => {
     <>
       <Card>
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-white/10">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Order List</h2>
           <div className="flex items-center gap-3">
             <div className="w-64">
@@ -168,7 +168,7 @@ export const OrdersTable = ({ initialData }) => {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-gray-200 dark:border-gray-700">
+              <tr className="border-b border-gray-200 dark:border-white/10">
                 <th className="px-6 py-3 text-left w-12">
                   <input
                     type="checkbox"
@@ -200,7 +200,7 @@ export const OrdersTable = ({ initialData }) => {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody className="divide-y divide-gray-200 dark:divide-white/10">
               {paginatedOrders.length > 0 ? (
                 paginatedOrders.map((order, index) => (
                   <tr

@@ -7,7 +7,7 @@ export const Header = ({ onMenuClick }) => {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <header className="sticky top-0 z-30 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 transition-colors duration-200">
+    <header className="sticky top-0 z-30 bg-gray-50 dark:bg-black border-b border-gray-200 dark:border-white/10 transition-colors duration-200">
       <div className="flex items-center justify-between px-6 py-4">
         {/* Left Section */}
         <div className="flex items-center gap-4 flex-1">

@@ -3,7 +3,7 @@ import { ordersData } from '../data/ordersData';
 
 export const UserProfile = () => {
   return (
-    <div className="p-6 space-y-6">
+    <div className="p-6 space-y-6 bg-gray-50 dark:bg-black min-h-full">
       {/* Page Header */}
       <div>
         <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mb-2">

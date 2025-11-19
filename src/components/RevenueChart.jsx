@@ -78,16 +78,16 @@ export const RevenueChart = ({ data }) => {
             <Line
               type="monotone"
               dataKey="current"
-              stroke="#A78BFA"
-              strokeWidth={2}
+              stroke="#8B5CF6"
+              strokeWidth={2.5}
               dot={false}
               name="Current Week"
             />
             <Line
               type="monotone"
               dataKey="previous"
-              stroke="#C4B5FD"
-              strokeWidth={2}
+              stroke="#6366F1"
+              strokeWidth={2.5}
               dot={false}
               strokeDasharray="5 5"
               name="Previous Week"

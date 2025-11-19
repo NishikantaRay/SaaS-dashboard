@@ -6,7 +6,7 @@ export const StatCard = ({ title, value, change, changeType, prefix = '', suffix
   const isIncrease = changeType === 'increase';
 
   return (
-    <Card className="hover:shadow-md transition-shadow duration-200">
+    <Card>
       <CardContent className="py-5">
         <div className="flex items-start justify-between">
           <div className="flex-1">

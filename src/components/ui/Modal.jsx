@@ -22,13 +22,13 @@ export const Modal = ({ isOpen, onClose, title, children, size = 'md' }) => {
       {/* Modal */}
       <div 
         className={cn(
-          'relative w-full bg-white dark:bg-gray-800 rounded-xl shadow-xl',
+          'relative w-full bg-white dark:bg-white/10 rounded-xl border border-gray-200 dark:border-white/10',
           'animate-slide-in',
           sizes[size]
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-white/10">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
             {title}
           </h2>

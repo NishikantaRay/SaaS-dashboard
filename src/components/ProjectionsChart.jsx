@@ -59,7 +59,7 @@ export const ProjectionsChart = ({ data }) => {
               }}
               cursor={{ fill: isDark ? '#1F2937' : '#F3F4F6' }}
             />
-            <Bar dataKey="value" fill="#A5B4FC" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="value" fill="#A5B4FC" radius={[6, 6, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </CardContent>
