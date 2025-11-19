@@ -44,8 +44,8 @@ const menuItems = [
   }
 ];
 
-export const Sidebar = ({ isOpen, onClose }) => {
-  const [expandedSections, setExpandedSections] = useState(['favorites', 'dashboards']);
+export const Sidebar = ({ isOpen, onClose, currentPage, onNavigate }) => {
+  const [expandedSections, setExpandedSections] = useState(['favorites', 'dashboards', 'pages']);
 
   const toggleSection = (sectionId) => {
     setExpandedSections(prev =>
@@ -53,6 +53,13 @@ export const Sidebar = ({ isOpen, onClose }) => {
         ? prev.filter(id => id !== sectionId)
         : [...prev, sectionId]
     );
+  };
+
+  const handleNavigation = (itemId) => {
+    onNavigate(itemId);
+    if (window.innerWidth < 1024) {
+      onClose();
+    }
   };
 
   return (
@@ -106,10 +113,11 @@ export const Sidebar = ({ isOpen, onClose }) => {
                   {section.items.map((item) => (
                     <button
                       key={item.id}
+                      onClick={() => handleNavigation(item.id)}
                       className={cn(
                         'flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm',
                         'transition-all duration-200',
-                        item.active
+                        currentPage === item.id
                           ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium'
                           : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800/50'
                       )}
