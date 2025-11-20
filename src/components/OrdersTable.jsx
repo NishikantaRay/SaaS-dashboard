@@ -1,4 +1,6 @@
 import { useState, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { addOrder, updateOrder, deleteOrder } from '../store/slices/ordersSlice';
 import { Card } from './ui/Card';
 import { SearchInput } from './ui/Input';
 import { Button } from './ui/Button';
@@ -11,8 +13,9 @@ import { toast } from 'react-toastify';
 
 const ITEMS_PER_PAGE = 10;
 
-export const OrdersTable = ({ initialData }) => {
-  const [orders, setOrders] = useState(initialData);
+export const OrdersTable = () => {
+  const dispatch = useDispatch();
+  const orders = useSelector((state) => state.orders.orders);
   const [searchTerm, setSearchTerm] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -141,14 +144,16 @@ export const OrdersTable = ({ initialData }) => {
     };
 
     if (editingOrder) {
-      // Update existing order
-      setOrders(orders.map(o => 
-        (o.id === editingOrder.id && o.user.name === editingOrder.user.name) ? orderData : o
-      ));
+      // Update existing order using Redux
+      dispatch(updateOrder({
+        id: editingOrder.id,
+        oldUserName: editingOrder.user.name,
+        orderData
+      }));
       toast.success('Order updated successfully!');
     } else {
-      // Add new order
-      setOrders([orderData, ...orders]);
+      // Add new order using Redux
+      dispatch(addOrder(orderData));
       toast.success('Order created successfully!');
     }
 
@@ -159,7 +164,10 @@ export const OrdersTable = ({ initialData }) => {
   // Handle delete
   const handleDelete = (order) => {
     if (window.confirm(`Are you sure you want to delete order ${order.id}?`)) {
-      setOrders(orders.filter(o => !(o.id === order.id && o.user.name === order.user.name)));
+      dispatch(deleteOrder({
+        id: order.id,
+        userName: order.user.name
+      }));
       toast.success('Order deleted successfully!');
     }
   };

@@ -1,5 +1,4 @@
 import { OrdersTable } from '../components/OrdersTable';
-import { ordersData } from '../data/ordersData';
 
 export const UserProfile = () => {
   return (
@@ -17,7 +16,7 @@ export const UserProfile = () => {
       </div>
 
       {/* Orders Table */}
-      <OrdersTable initialData={ordersData} />
+      <OrdersTable />
     </div>
   );
 };
