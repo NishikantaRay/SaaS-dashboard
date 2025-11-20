@@ -7,6 +7,7 @@ import { Pagination } from './Pagination';
 import { Plus, Pencil, Trash2, Copy } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { statusColors } from '../data/ordersData';
+import { toast } from 'react-toastify';
 
 const ITEMS_PER_PAGE = 10;
 
@@ -25,6 +26,7 @@ export const OrdersTable = ({ initialData }) => {
     address: '',
     status: 'Pending'
   });
+  const [errors, setErrors] = useState({});
 
   // Filter orders based on search
   const filteredOrders = useMemo(() => {
@@ -42,6 +44,34 @@ export const OrdersTable = ({ initialData }) => {
     const start = (currentPage - 1) * ITEMS_PER_PAGE;
     return filteredOrders.slice(start, start + ITEMS_PER_PAGE);
   }, [filteredOrders, currentPage]);
+
+  // Validation function
+  const validateForm = () => {
+    const newErrors = {};
+    
+    if (!formData.id.trim()) {
+      newErrors.id = 'Order ID is required';
+    }
+    
+    if (!formData.userName.trim()) {
+      newErrors.userName = 'User name is required';
+    } else if (formData.userName.trim().length < 3) {
+      newErrors.userName = 'User name must be at least 3 characters';
+    }
+    
+    if (!formData.project.trim()) {
+      newErrors.project = 'Project name is required';
+    }
+    
+    if (!formData.address.trim()) {
+      newErrors.address = 'Address is required';
+    } else if (formData.address.trim().length < 5) {
+      newErrors.address = 'Address must be at least 5 characters';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   // Format date
   const formatDate = (dateString) => {
@@ -64,6 +94,7 @@ export const OrdersTable = ({ initialData }) => {
 
   // Handle add/edit
   const handleOpenModal = (order = null) => {
+    setErrors({});
     if (order) {
       setEditingOrder(order);
       setFormData({
@@ -91,6 +122,12 @@ export const OrdersTable = ({ initialData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
+    // Validate form
+    if (!validateForm()) {
+      toast.error('Please fix the errors in the form');
+      return;
+    }
+    
     const orderData = {
       id: formData.id,
       user: {
@@ -104,18 +141,26 @@ export const OrdersTable = ({ initialData }) => {
     };
 
     if (editingOrder) {
-      setOrders(orders.map(o => o.id === editingOrder.id && o.user.name === editingOrder.user.name ? orderData : o));
+      // Update existing order
+      setOrders(orders.map(o => 
+        (o.id === editingOrder.id && o.user.name === editingOrder.user.name) ? orderData : o
+      ));
+      toast.success('Order updated successfully!');
     } else {
+      // Add new order
       setOrders([orderData, ...orders]);
+      toast.success('Order created successfully!');
     }
 
     setIsModalOpen(false);
+    setErrors({});
   };
 
   // Handle delete
   const handleDelete = (order) => {
     if (window.confirm(`Are you sure you want to delete order ${order.id}?`)) {
       setOrders(orders.filter(o => !(o.id === order.id && o.user.name === order.user.name)));
+      toast.success('Order deleted successfully!');
     }
   };
 
@@ -316,54 +361,74 @@ export const OrdersTable = ({ initialData }) => {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Order ID
+              Order ID <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={formData.id}
               onChange={(e) => setFormData({ ...formData, id: e.target.value })}
-              className="w-full px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              required
+              className={cn(
+                'w-full px-4 py-2 text-sm rounded-lg border bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500',
+                errors.id ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+              )}
             />
+            {errors.id && (
+              <p className="mt-1 text-xs text-red-500">{errors.id}</p>
+            )}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              User Name
+              User Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={formData.userName}
               onChange={(e) => setFormData({ ...formData, userName: e.target.value })}
-              className="w-full px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              required
+              className={cn(
+                'w-full px-4 py-2 text-sm rounded-lg border bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500',
+                errors.userName ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+              )}
             />
+            {errors.userName && (
+              <p className="mt-1 text-xs text-red-500">{errors.userName}</p>
+            )}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Project
+              Project <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={formData.project}
               onChange={(e) => setFormData({ ...formData, project: e.target.value })}
-              className="w-full px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              required
+              className={cn(
+                'w-full px-4 py-2 text-sm rounded-lg border bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500',
+                errors.project ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+              )}
             />
+            {errors.project && (
+              <p className="mt-1 text-xs text-red-500">{errors.project}</p>
+            )}
           </div>
 
           <div>
             <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-              Address
+              Address <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
               value={formData.address}
               onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-              className="w-full px-4 py-2 text-sm rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              required
+              className={cn(
+                'w-full px-4 py-2 text-sm rounded-lg border bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500',
+                errors.address ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
+              )}
             />
+            {errors.address && (
+              <p className="mt-1 text-xs text-red-500">{errors.address}</p>
+            )}
           </div>
 
           <div>
