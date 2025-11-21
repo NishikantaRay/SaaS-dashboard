@@ -27,7 +27,7 @@ const menuItems = [
     label: 'Dashboards',
     items: [
       { id: 'default', label: 'Default', path: '' },
-      { id: 'ecommerce', label: 'eCommerce', icon: ShoppingCart, path: '/ecommerce' },
+      { id: 'ecommerce', label: 'ECommerce', icon: ShoppingCart, path: '/ecommerce' },
       { id: 'projects', label: 'Projects', icon: FileText, path: '' },
       { id: 'online-courses', label: 'Online Courses', icon: BookOpen, path: '' }
     ]

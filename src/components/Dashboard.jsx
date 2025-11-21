@@ -18,7 +18,7 @@ export const Dashboard = () => {
     <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 bg-gray-50 dark:bg-black min-h-full">
       {/* Page Title */}
       <div>
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">eCommerce</h1>
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">Ecommerce</h1>
       </div>
 
       {/* Stats Grid */}
