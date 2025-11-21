@@ -17,7 +17,7 @@ export const ProjectionsChart = ({ data }) => {
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <CardTitle>Projections vs Actuals</CardTitle>
           <div className="flex gap-2">
             <button className="px-3 py-1.5 text-xs font-medium rounded-md bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100">
@@ -30,7 +30,7 @@ export const ProjectionsChart = ({ data }) => {
         </div>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={250}>
+        <ResponsiveContainer width="100%" height={250} className="min-h-[200px]">
           <BarChart data={data}>
             <CartesianGrid
               strokeDasharray="3 3"

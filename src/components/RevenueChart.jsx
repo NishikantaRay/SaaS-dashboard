@@ -25,9 +25,9 @@ export const RevenueChart = ({ data }) => {
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <CardTitle>Revenue</CardTitle>
-          <div className="flex items-center gap-4 text-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm">
             <div className="flex items-center gap-2">
               <span className="text-gray-600 dark:text-gray-400">Current Week</span>
               <span className="font-semibold text-gray-900 dark:text-gray-100">$58,211</span>
@@ -40,7 +40,7 @@ export const RevenueChart = ({ data }) => {
         </div>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={300} className="min-h-[250px]">
           <LineChart data={chartData}>
             <CartesianGrid
               strokeDasharray="3 3"

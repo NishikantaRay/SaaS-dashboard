@@ -11,9 +11,9 @@ export const RevenueByLocation = ({ data }) => {
         <CardTitle>Revenue by Location</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row items-center sm:justify-between gap-6">
           {/* Pie Chart */}
-          <div className="w-40 h-40">
+          <div className="w-40 h-40 flex-shrink-0">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie

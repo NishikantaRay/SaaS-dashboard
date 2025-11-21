@@ -4,6 +4,11 @@ A modern, full-featured SaaS admin dashboard built with React, Redux Toolkit, an
 
 ![Dashboard Preview](https://img.shields.io/badge/React-19.2.0-blue) ![Redux Toolkit](https://img.shields.io/badge/Redux_Toolkit-2.10.1-purple) ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.0-cyan) ![Tests Passing](https://img.shields.io/badge/tests-65_passing-success)
 
+## 🌐 Main Routes
+
+- **`/`** - Dashboard (eCommerce overview with stats, charts, and tables)
+- **`/user-profile`** - User Profile (User management with CRUD operations)
+
 ## ✨ Features
 
 ### 🎨 User Interface

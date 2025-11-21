@@ -192,37 +192,40 @@ export const OrdersTable = () => {
     <>
       <Card>
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-white/10">
-          <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Order List</h2>
-          <div className="flex items-center gap-3">
-            <div className="w-64">
-              <SearchInput
-                placeholder="Search"
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setCurrentPage(1);
-                }}
-              />
+        <div className="px-4 sm:px-6 py-4 border-b border-gray-200 dark:border-white/10">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-gray-100">Order List</h2>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+              <div className="w-full sm:w-64">
+                <SearchInput
+                  placeholder="Search"
+                  value={searchTerm}
+                  onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    setCurrentPage(1);
+                  }}
+                />
+              </div>
+              <Button
+                variant="primary"
+                size="md"
+                onClick={() => handleOpenModal()}
+                className="flex items-center justify-center gap-2 w-full sm:w-auto"
+              >
+                <Plus size={18} />
+                <span>Add Order</span>
+              </Button>
             </div>
-            <Button
-              variant="primary"
-              size="md"
-              onClick={() => handleOpenModal()}
-              className="flex items-center gap-2"
-            >
-              <Plus size={18} />
-              Add Order
-            </Button>
           </div>
         </div>
 
         {/* Table */}
         <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-gray-200 dark:border-white/10">
-                <th className="px-6 py-3 text-left w-12">
+          <div className="inline-block min-w-full align-middle">
+            <table className="min-w-full w-full">
+              <thead>
+                <tr className="border-b border-gray-200 dark:border-white/10">
+                  <th className="px-4 sm:px-6 py-3 text-left w-12">
                   <input
                     type="checkbox"
                     checked={selectedOrders.length === paginatedOrders.length && paginatedOrders.length > 0}
@@ -230,25 +233,25 @@ export const OrdersTable = () => {
                     className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-indigo-600 focus:ring-indigo-500"
                   />
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Order ID
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   User
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Project
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Address
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Date
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Status
                 </th>
-                <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                <th className="px-4 sm:px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
@@ -260,7 +263,7 @@ export const OrdersTable = () => {
                     key={`${order.id}-${order.user.name}-${index}`}
                     className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
                   >
-                    <td className="px-6 py-4">
+                    <td className="px-4 sm:px-6 py-4">
                       <input
                         type="checkbox"
                         checked={selectedOrders.includes(`${order.id}-${order.user.name}`)}
@@ -268,54 +271,54 @@ export const OrdersTable = () => {
                         className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-indigo-600 focus:ring-indigo-500"
                       />
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-4 sm:px-6 py-4">
                       <span className="text-sm font-medium text-gray-900 dark:text-gray-100">
                         {order.id}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-4 sm:px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center flex-shrink-0">
                           <span className="text-white text-xs font-medium">
                             {order.user.avatar}
                           </span>
                         </div>
-                        <span className="text-sm text-gray-900 dark:text-gray-100">
+                        <span className="text-sm text-gray-900 dark:text-gray-100 whitespace-nowrap">
                           {order.user.name}
                         </span>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                    <td className="px-4 sm:px-6 py-4">
+                      <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
                         {order.project}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-4 sm:px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm text-gray-600 dark:text-gray-400">
+                        <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
                           {order.address}
                         </span>
-                        <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+                        <button className="p-1 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors flex-shrink-0">
                           <Copy size={14} className="text-gray-400" />
                         </button>
                       </div>
                     </td>
-                    <td className="px-6 py-4">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">
+                    <td className="px-4 sm:px-6 py-4">
+                      <span className="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap">
                         {formatDate(order.date)}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-4 sm:px-6 py-4">
                       <span
                         className={cn(
-                          'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium',
+                          'inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap',
                           statusColors[order.status]
                         )}
                       >
                         {order.status}
                       </span>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-4 sm:px-6 py-4">
                       <div className="flex items-center justify-end gap-2">
                         <button
                           onClick={() => handleOpenModal(order)}
@@ -346,6 +349,7 @@ export const OrdersTable = () => {
               )}
             </tbody>
           </table>
+          </div>
         </div>
 
         {/* Pagination */}
